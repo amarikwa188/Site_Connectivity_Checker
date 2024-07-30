@@ -26,13 +26,14 @@ def index() -> str:
         print(choice)
         print(url)
 
-        match choice:
-            case "C":
-                pass
-            case "D":
-                urls.remove(url)
-            case "A":
-                pass
+        if choice == "C":
+            pass
+        elif choice == "D":
+            urls.remove(url)
+        else:
+            if url not in urls:
+                urls.append(url)
+            
             
         return redirect(url_for("index"))
     else:
