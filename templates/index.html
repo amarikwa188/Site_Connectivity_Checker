@@ -5,38 +5,11 @@
     <link rel="stylesheet" href="../static/index.css">
 </head>
 <body>
-    <div id="main">
-        <h1 id="logo">Site Connectivity Checker</h1>
 
-        <div id="list-box">
-            {%  if not urls%}
-                <h1 id="no-url">NO CURRENT URLS</h1>
-            {% endif %}
-
-            {% for url in urls %}
-                <form action="#" method="post">
-                <table class="list-item" border="0">
-                <tr>
-                    <td class="url-col">
-                        <p class="url">{{url}}</p>
-                    </td>
-                    <td class="data-col">
-                        <div class="status"><p>online</p></div>
-                        <button class="check" name="C" value={{url}}>Check</button>
-                        <button class="delete" name="D" value={{url}}>Delete</button>
-                    </td>
-                </tr>
-                </table>
-                </form>
-            {% endfor %}
-        </div>
-        <br>
-        <form action="#" id="add-url-form" method="post">
-            <input type="text" id="url-entry" name="added-url" placeholder="Enter a URL" required>
-            <input type="submit" id="add-url-button" value="Add Website">
-        </form>
-    </div>
-
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
     <script src="../static/index.js"></script>
 </body>
 </html>
