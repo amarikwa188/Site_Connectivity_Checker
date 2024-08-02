@@ -16,6 +16,14 @@ def index() -> str:
         print(f"command:\n{com}\n")
         print(f"url:\n{url}\n")
 
+        match com:
+            case 'A':
+                pass
+            case 'C':
+                pass
+            case 'D':
+                pass
+
     return render_template("index.html", urls=urls)
     
 

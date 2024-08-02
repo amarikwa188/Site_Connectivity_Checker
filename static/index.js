@@ -5,8 +5,7 @@ $(document).on('submit', '.list-item', function(e){
         type: 'POST',
         url: '/',
         data:{
-            // 'this' refers the form, not the button
-            command: $('button').val(),
+            command: $('button').val(), // always says command = 'C'
             value: $(this).attr('value')
         },
         success:function()
@@ -15,3 +14,43 @@ $(document).on('submit', '.list-item', function(e){
         }
     })
 });
+
+//handling form data for addition
+$(document).on('submit', '#add-url-form', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '/',
+        data:{
+            command: 'A',
+            value: $('#added-url').val() 
+        },
+        success:function(){
+            console.log('add done');
+        }
+    })
+});
+
+// front-end functions to handle ui changes
+function addUrl(){
+    const url = document.getElementById('added-url').value;
+    document.getElementById('list-box').innerHTML += 
+    `
+    <form method="POST" class="list-item" value="${url}">
+    <table border="1">
+    <tr>
+        <td class="url-col">${url}</td>
+        <td class="data-col">
+            <p class="status">offline</p>
+            <button class="data-button" value="C">
+                Check
+            </button>
+            <button class="data-button" value="D">
+                Delete
+            </button>
+        </td>
+    </tr>
+    </table>
+    </form>
+    `
+}
