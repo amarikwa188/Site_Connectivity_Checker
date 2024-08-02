@@ -14,16 +14,16 @@
             {% endif %}
 
             {% for url in urls %}
-                <form method="POST" class="list-item">
+                <form method="POST" class="list-item" value="{{url}}">
                 <table border="1">
                 <tr>
                     <td class="url-col">{{url}}</td>
                     <td class="data-col">
                         <p class="status">offline</p>
-                        <button class="check" name="C" value="{{url}}">
+                        <button class="data-button" value="C">
                             Check
                         </button>
-                        <button class="delete" name="D" value="{{url}}">
+                        <button class="data-button" value="D">
                             Delete
                         </button>
                     </td>
@@ -37,7 +37,7 @@
                 <input type="submit" class="add-url-button" value="Add Website">
             </form>
         </div>
-        
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
