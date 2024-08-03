@@ -73,4 +73,11 @@ function addUrl(){
     </table>
     </form>
     `
+
+    setTimeout(resetForm, 50);
+}
+
+function resetForm(){
+    const frm = document.getElementById("add-url-form");
+    frm.reset();
 }
