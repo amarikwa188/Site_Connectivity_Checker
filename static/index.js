@@ -13,9 +13,31 @@ $(document).on('submit', '.list-item', function(e){
             console.log('data sent');
         }
     }).done(function(output){
-        alert(output);
+        // const command = output.split('::');
+        // alert(command);
+        performAction(output);
     })
 });
+
+function performAction(data){
+    const parts = data.split('::');
+    const url = parts[1];
+    
+    switch (parts[0]){
+        case "check":
+            alert(parts[1]);
+            alert(parts[2]);
+            break;
+        case "delete":
+            alert(parts[1]);
+            const frm = document.getElementsByName(url)[0];
+            alert(frm.name);
+            frm.remove();
+            break;
+        default:
+            alert("response error");
+    }
+}
 
 //handling form data for addition
 $(document).on('submit', '#add-url-form', function(e){
