@@ -17,11 +17,11 @@ def index() -> str:
         print(f"url:\n{url}\n")
 
         match com:
-            case 'A':
+            case 'Add':
+                urls.append(url)
+            case 'Check':
                 pass
-            case 'C':
-                pass
-            case 'D':
+            case 'Delete':
                 pass
 
     return render_template("index.html", urls=urls)

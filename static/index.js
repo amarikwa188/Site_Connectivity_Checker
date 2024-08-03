@@ -5,12 +5,12 @@ $(document).on('submit', '.list-item', function(e){
         type: 'POST',
         url: '/',
         data:{
-            command: $('button').val(), // always says command = 'C'
+            command: $(this).find("input[type=submit]:focus").val(),
             value: $(this).attr('value')
         },
         success:function()
         {
-            console.log("action succesful");
+            console.log('data sent');
         }
     })
 });
@@ -22,7 +22,7 @@ $(document).on('submit', '#add-url-form', function(e){
         type: 'POST',
         url: '/',
         data:{
-            command: 'A',
+            command: 'Add',
             value: $('#added-url').val() 
         },
         success:function(){
