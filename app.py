@@ -24,7 +24,8 @@ def index() -> str:
                 return f"check::{url}::{online}"
             case 'Delete':
                 urls.remove(url)
-                return f"delete::{url}"
+                empty: bool = not urls
+                return f"delete::{url}::{empty}" 
 
     return render_template("index.html", urls=urls) 
     

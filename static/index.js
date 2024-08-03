@@ -21,13 +21,16 @@ function performAction(data){
     const parts = data.split('::');
     const command = parts[0];
     const url = parts[1];
+    const status = parts[2];
     
     switch (command){
         case "check":
-            const status = parts[2];
             break;
         case "delete":
             deleteListItem(url);
+            if (status === "True"){
+                displayNoUrlsMessage();
+            }
             break;
         default:
             alert("response error");
@@ -37,6 +40,11 @@ function performAction(data){
 function deleteListItem(url){
     const frm = document.getElementsByName(url)[0];
     frm.remove();
+}
+
+function displayNoUrlsMessage(){
+    const message = document.getElementById("no-urls");
+    message.style = "display: revert";
 }
 
 //handling form data for addition
@@ -78,8 +86,12 @@ function addUrl(){
     </table>
     </form>
     `
-
+    //reset form after data has been sent
     setTimeout(resetForm, 50);
+
+    //remove 'no current urls' watermark if present 
+    const message = document.getElementById("no-urls");
+    message.style = "display: none";
 }
 
 function resetForm(){

@@ -9,6 +9,15 @@
         <h1 id="logo">Site Connectivity Checker</h1>
 
         <div id="list-box">
+            <h1 id="no-urls" style="display: none;">NO CURRENT URLS</h1>
+
+            {% if not urls %}
+                <script>
+                    message = document.getElementById("no-urls");
+                    message.style = "display: revert";
+                </script>
+            {% endif %}
+
             {% for url in urls %}
                 <form method="POST" class="list-item" value="{{url}}" name="{{url}}">
                 <table class="table">
