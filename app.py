@@ -20,9 +20,10 @@ def index() -> str:
             case 'Add':
                 urls.append(url)
             case 'Check':
-                pass
+                status: str = 'online'
+                return f"{url} is {status}"
             case 'Delete':
-                pass
+                return 'deleted'
 
     return render_template("index.html", urls=urls)
     

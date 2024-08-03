@@ -12,6 +12,8 @@ $(document).on('submit', '.list-item', function(e){
         {
             console.log('data sent');
         }
+    }).done(function(output){
+        alert(output);
     })
 });
 
