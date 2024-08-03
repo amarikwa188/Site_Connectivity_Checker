@@ -1,6 +1,7 @@
 body{
     display: flex;
     min-height: 90vh;
+    background-color: lightslategrey;
 }
 
 #main{
@@ -8,7 +9,7 @@ body{
     width: 600px;
     margin: auto;
 
-    border: 1px solid black;
+    border: 1.5px solid black;
     text-align: center;
     padding: 20px 0;
 }
@@ -28,6 +29,19 @@ body{
     border: 1px solid black;
     text-align: left;
     margin-bottom: 20px;
+}
+
+#list-box::-webkit-scrollbar{
+    width: 5px;
+}
+
+#list-box::-webkit-scrollbar-track{
+    background-color: lightgray;
+    border-left: 1px solid black;
+}
+
+#list-box::-webkit-scrollbar-thumb{
+    background-color: grey;
 }
 
 .list-item{
