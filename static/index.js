@@ -39,20 +39,16 @@ function addUrl(){
     document.getElementById('list-box').innerHTML += 
     `
     <form method="POST" class="list-item" value="${url}">
-    <table border="1">
+    <table>
     <tr>
         <td class="url-col">${url}</td>
         <td class="data-col">
             <p class="status">offline</p>
-            <input type="submit" value="Check" class="data-button">
-            <input type="submit" value="Delete" class="data-button">
+            <input type="submit" value="Check" class="check-button">
+            <input type="submit" value="Delete" class="delete-button">
         </td>
     </tr>
     </table>
     </form>
     `
-
-    //empty the text field
-    const entry = document.getElementById("added-url");
-    entry.value = "";
 }
