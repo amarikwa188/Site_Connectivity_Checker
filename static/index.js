@@ -42,12 +42,8 @@ function addUrl(){
         <td class="url-col">${url}</td>
         <td class="data-col">
             <p class="status">offline</p>
-            <button class="data-button" value="C">
-                Check
-            </button>
-            <button class="data-button" value="D">
-                Delete
-            </button>
+            <input type="submit" value="Check" class="data-button">
+            <input type="submit" value="Delete" class="data-button">
         </td>
     </tr>
     </table>
