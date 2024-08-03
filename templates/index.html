@@ -9,10 +9,6 @@
         <h1 id="logo">Site Connectivity Checker</h1>
 
         <div id="list-box">
-            {% if not urls %}
-                <h1 id="no-url">NO CURRENT URLS</h1>
-            {% endif %}
-
             {% for url in urls %}
                 <form method="POST" class="list-item" value="{{url}}" name="{{url}}">
                 <table class="table">

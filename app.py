@@ -6,7 +6,7 @@ app: Flask  = Flask(__name__)
 urls: list[str] = ["example1.com", "example2.com", "example3.com",
                    "example4.com", "example5.com", "example6.com"]
 
-
+ 
 @app.route("/", methods=["POST", "GET"])
 def index() -> str:
     if request.method == "POST":
@@ -20,13 +20,13 @@ def index() -> str:
             case 'Add':
                 urls.append(url)
             case 'Check':
-                status: str = 'online'
-                return f"check::{url}::{status}"
+                online: bool = True
+                return f"check::{url}::{online}"
             case 'Delete':
                 urls.remove(url)
                 return f"delete::{url}"
 
-    return render_template("index.html", urls=urls)
+    return render_template("index.html", urls=urls) 
     
 
 if __name__ == "__main__":

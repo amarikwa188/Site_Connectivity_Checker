@@ -13,30 +13,30 @@ $(document).on('submit', '.list-item', function(e){
             console.log('data sent');
         }
     }).done(function(output){
-        // const command = output.split('::');
-        // alert(command);
         performAction(output);
     })
 });
 
 function performAction(data){
     const parts = data.split('::');
+    const command = parts[0];
     const url = parts[1];
     
-    switch (parts[0]){
+    switch (command){
         case "check":
-            alert(parts[1]);
-            alert(parts[2]);
+            const status = parts[2];
             break;
         case "delete":
-            alert(parts[1]);
-            const frm = document.getElementsByName(url)[0];
-            alert(frm.name);
-            frm.remove();
+            deleteListItem(url);
             break;
         default:
             alert("response error");
     }
+}
+
+function deleteListItem(url){
+    const frm = document.getElementsByName(url)[0];
+    frm.remove();
 }
 
 //handling form data for addition
@@ -60,7 +60,7 @@ function addUrl(){
     const url = document.getElementById('added-url').value;
     document.getElementById('list-box').innerHTML += 
     `
-    <form method="POST" class="list-item" value="${url}">
+    <form method="POST" class="list-item" value="${url}" name="${url}">
     <table>
     <tr>
         <td class="url-col">${url}</td>
