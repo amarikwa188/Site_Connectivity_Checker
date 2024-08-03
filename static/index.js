@@ -58,6 +58,11 @@ $(document).on('submit', '#add-url-form', function(e){
 // front-end functions to handle ui changes
 function addUrl(){
     const url = document.getElementById('added-url').value;
+
+    if(url === ""){
+        return;
+    }
+
     document.getElementById('list-box').innerHTML += 
     `
     <form method="POST" class="list-item" value="${url}" name="${url}">
