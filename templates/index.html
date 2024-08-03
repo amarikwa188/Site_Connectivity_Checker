@@ -8,11 +8,6 @@
     <div id="main">
         <h1 id="logo">Site Connectivity Checker</h1>
 
-        <form method="post" id="add-url-form">
-            <input type="text" id="added-url" placeholder="Enter a URL">
-            <input type="submit" id="add-url-button" value="Add Website" onclick="addUrl()">
-        </form>
-
         <div id="list-box">
             {% if not urls %}
                 <h1 id="no-url">NO CURRENT URLS</h1>
@@ -25,14 +20,19 @@
                     <td class="url-col">{{url}}</td>
                     <td class="data-col">
                         <p class="status">offline</p>
-                        <input type="submit" value="Check" class="data-button">
-                        <input type="submit" value="Delete" class="data-button">
+                        <input type="submit" value="Check" class="check-button">
+                        <input type="submit" value="Delete" class="delete-button">
                     </td>
                 </tr>
                 </table>
                 </form>
             {% endfor %}
         </div>
+
+        <form method="post" id="add-url-form">
+            <input type="text" id="added-url" placeholder="Enter a URL">
+            <input type="submit" id="add-url-button" value="Add Website" onclick="addUrl()">
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
