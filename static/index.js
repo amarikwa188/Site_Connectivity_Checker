@@ -51,4 +51,8 @@ function addUrl(){
     </table>
     </form>
     `
+
+    //empty the text field
+    const entry = document.getElementById("added-url");
+    entry.value = "";
 }
