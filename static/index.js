@@ -25,6 +25,7 @@ function performAction(data){
     
     switch (command){
         case "check":
+            updateStatusUI(url, status);
             break;
         case "delete":
             deleteListItem(url);
@@ -35,6 +36,19 @@ function performAction(data){
         default:
             alert("response error");
     }
+}
+
+function updateStatusUI(url, status){
+    const statusObject = document.getElementsByName(`status${url}`)[0];
+
+    if(status == "True"){
+        statusObject.style = "background-color: lightgreen;"
+        statusObject.innerHTML = "online";
+    }else{
+        statusObject.style = "background-color: lightpink;"
+        statusObject.innerHTML = "offline";
+    }
+
 }
 
 function deleteListItem(url){
@@ -74,11 +88,11 @@ function addUrl(){
     document.getElementById('list-box').innerHTML += 
     `
     <form method="POST" class="list-item" value="${url}" name="${url}">
-    <table>
+    <table class="table">
     <tr>
         <td class="url-col">${url}</td>
         <td class="data-col">
-            <p class="status">offline</p>
+            <p class="status" name="status${url}">status</p>
             <input type="submit" value="Check" class="check-button">
             <input type="submit" value="Delete" class="delete-button">
         </td>

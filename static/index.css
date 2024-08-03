@@ -1,7 +1,7 @@
 body{
     display: flex;
     min-height: 90vh;
-    background-color: lightslategrey;
+    background-color: #c3d0de;
 }
 
 #main{
@@ -62,9 +62,12 @@ body{
 }
 
 .status{
-    display: inline;
-    background-color: lightpink;
-    padding: 1px 5px 3px 5px;
+    display: inline-block;
+    background-color: #fff27e;
+    padding: 3px;
+    width: 45px;
+    text-align: center;
+    margin: 0px;
 }
 
 .check-button{
@@ -78,7 +81,11 @@ body{
 
 .check-button:hover{
     cursor: pointer;
-    background-color: rgb(124, 215, 246);
+    background-color: #7cd7f6;
+}
+
+.check-button:active{
+    background-color: #feffff;
 }
 
 .delete-button{

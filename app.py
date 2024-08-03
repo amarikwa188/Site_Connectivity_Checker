@@ -1,10 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
+from http.client import HTTPConnection
+from urllib.parse import urlparse, ParseResult
 
 
 app: Flask  = Flask(__name__)
 
 urls: list[str] = ["example1.com", "example2.com", "example3.com",
                    "example4.com", "example5.com", "example6.com"]
+
+
+def check_site(url: str, timeout:int=5) -> bool:
+    parser: ParseResult = urlparse(url)
+    host_name: str = parser.netloc or parser.path.split("/")[0]
+    for port in (80, 443):
+        connection: HTTPConnection = HTTPConnection(host=host_name, port=port, timeout=timeout)
+
+        try:
+            connection.request("HEAD", "/")
+            return True
+        except Exception:
+            return False
+        finally:
+            connection.close()
 
  
 @app.route("/", methods=["POST", "GET"])
@@ -20,7 +37,7 @@ def index() -> str:
             case 'Add':
                 urls.append(url)
             case 'Check':
-                online: bool = True
+                online: bool = check_site(url)
                 return f"check::{url}::{online}"
             case 'Delete':
                 urls.remove(url)
