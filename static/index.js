@@ -1,6 +1,8 @@
 // handling form data for checking and deleting
 $(document).on('submit', '.list-item', function(e){
     e.preventDefault();
+    const url = $(this).attr('value');
+    updateCheckingMessage(url, "check");
     $.ajax({
         type: 'POST',
         url: '/',
@@ -14,8 +16,31 @@ $(document).on('submit', '.list-item', function(e){
         }
     }).done(function(output){
         performAction(output);
+        updateCheckingMessage(url, "found");
     })
 });
+
+function updateCheckingMessage(url, state){
+    
+    const display = document.getElementsByName(`update${url}`)[0];
+    switch(state){
+        case "check":
+            display.textContent = '...';
+            break;
+        case "found":
+            display.textContent = "!";
+            setTimeout(clearCheckingMessage(display), 1000);
+            break;
+    }
+}
+
+function clearCheckingMessage(display){
+    function inner(){
+        display.textContent = "";
+    }
+
+    return inner;
+}
 
 function performAction(data){
     const parts = data.split('::');
@@ -92,8 +117,9 @@ function addUrl(){
     <tr>
         <td class="url-col">${url}</td>
         <td class="data-col">
+            <p class="update" name="update${url}"></p>
             <p class="status" name="status${url}">status</p>
-            <input type="submit" value="Check" class="check-button">
+            <input type="submit" value="Check" class="check-button" name="${url}">
             <input type="submit" value="Delete" class="delete-button">
         </td>
     </tr>

@@ -70,6 +70,10 @@ body{
     margin: 0px;
 }
 
+.update{
+    display: inline;
+}
+
 .check-button{
     font-family: 'Times New Roman', Times, serif;
     font-size: 15px;
