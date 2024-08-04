@@ -5,15 +5,19 @@ import json
 
 app: Flask  = Flask(__name__)
 
-
 urls: list[str] = []
 
-
 def save_urls() -> None:
+    """
+    Store the urls list in the json file.
+    """
     with open("url_list.json", "w") as file:
         json.dump(urls, file)
 
 def load_urls() -> None:
+    """
+    Load the data from the json file and store it in the urls list.
+    """
     try:
         with open("url_list.json", "r") as file:
             global urls
@@ -23,8 +27,14 @@ def load_urls() -> None:
             json.dump(urls, file)
         
 
-
 def check_site(url: str, timeout:int=5) -> bool:
+    """
+    Check if a given url is online.
+
+    :param url: a url.
+    :param timeout: the amount of time the connection will wait.
+    :return: whether the site is online.
+    """
     parser: ParseResult = urlparse(url)
     host_name: str = parser.netloc or parser.path.split("/")[0]
     for port in (80, 443):
@@ -41,18 +51,18 @@ def check_site(url: str, timeout:int=5) -> bool:
  
 @app.route("/", methods=["POST", "GET"])
 def index() -> str:
+    """
+    The main web page.
+    """
     load_urls()
     if request.method == "POST":
         com: str = request.form.get('command')
         url: str = request.form.get('value').strip()
 
-        print(f"command:\n{com}\n")
-        print(f"url:\n{url}\n")
-
         match com:
+            # respond to any given command
             case 'Add':
-                if url not in urls:
-                    urls.append(url)
+                if url not in urls: urls.append(url)
                 save_urls()
             case 'Check':
                 online: bool = check_site(url)
@@ -62,7 +72,6 @@ def index() -> str:
                 empty: bool = not urls
                 save_urls()
                 return f"delete::{url}::{empty}" 
-
 
     return render_template("index.html", urls=urls) 
     

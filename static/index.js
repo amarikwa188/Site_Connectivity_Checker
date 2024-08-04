@@ -109,7 +109,7 @@ $(document).on('submit', '#add-url-form', function(e){
     })
 });
 
-// front-end functions to handle ui changes
+// front-end function to handle ui changes
 function addUrl(){
     const url = document.getElementById('added-url').value;
 
