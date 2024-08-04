@@ -113,9 +113,11 @@ $(document).on('submit', '#add-url-form', function(e){
 function addUrl(){
     const url = document.getElementById('added-url').value;
 
-    if(url === "" || urls.includes(url)){
-        setTimeout(resetForm, 50);
+    if(url === ""){
         return;
+    }else if(urls.includes(url)){
+        displayDuplicateMessage();
+        return
     }
 
     document.getElementById('list-box').innerHTML += 
@@ -145,6 +147,18 @@ function addUrl(){
         const message = document.getElementById("no-urls");
         message.style = "display: none";
     } 
+}
+
+function displayDuplicateMessage(){
+    const message = document.getElementById("duplicate");
+    message.style.color = "lightcoral";
+
+    setTimeout(resetDuplicateMessage, 1500);
+}
+
+function resetDuplicateMessage(){
+    const message = document.getElementById("duplicate");
+    message.style.color = "lightyellow";
 }
 
 function resetForm(){
