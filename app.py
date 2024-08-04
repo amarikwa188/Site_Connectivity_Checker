@@ -1,12 +1,27 @@
 from flask import Flask, render_template, request
 from http.client import HTTPConnection
 from urllib.parse import urlparse, ParseResult
-
+import json
 
 app: Flask  = Flask(__name__)
 
-urls: list[str] = ["example1.com", "example2.com", "example3.com",
-                   "example4.com", "example5.com", "example6.com"]
+
+urls: list[str] = []
+
+
+def save_urls() -> None:
+    with open("url_list.json", "w") as file:
+        json.dump(urls, file)
+
+def load_urls() -> None:
+    try:
+        with open("url_list.json", "r") as file:
+            global urls
+            urls = json.load(file)
+    except FileNotFoundError:
+         with open("url_list.json", "w") as file:
+            json.dump(urls, file)
+        
 
 
 def check_site(url: str, timeout:int=5) -> bool:
@@ -26,6 +41,7 @@ def check_site(url: str, timeout:int=5) -> bool:
  
 @app.route("/", methods=["POST", "GET"])
 def index() -> str:
+    load_urls()
     if request.method == "POST":
         com: str = request.form.get('command')
         url: str = request.form.get('value').strip()
@@ -37,13 +53,16 @@ def index() -> str:
             case 'Add':
                 if url not in urls:
                     urls.append(url)
+                save_urls()
             case 'Check':
                 online: bool = check_site(url)
                 return f"check::{url}::{online}"
             case 'Delete':
                 urls.remove(url)
                 empty: bool = not urls
+                save_urls()
                 return f"delete::{url}::{empty}" 
+
 
     return render_template("index.html", urls=urls) 
     
