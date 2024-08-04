@@ -3,6 +3,8 @@
 <head>
     <title>Site Connectivity Checker</title>
     <link rel="stylesheet" href="../static/index.css">
+
+    <script>const urlListJson = JSON.parse('{{urls | tojson}}')</script>
 </head>
 <body>
     <div id="main">
@@ -40,6 +42,8 @@
             <input type="submit" id="add-url-button" value="Add Website" onclick="addUrl()">
         </form>
     </div>
+
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
             integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

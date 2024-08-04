@@ -1,27 +1,34 @@
+const urls = Object.values(urlListJson);
+
 // handling form data for checking and deleting
 $(document).on('submit', '.list-item', function(e){
     e.preventDefault();
+
+    const command = $(this).find("input[type=submit]:focus").val();
     const url = $(this).attr('value');
+
     updateCheckingMessage(url, "check");
+
     $.ajax({
         type: 'POST',
         url: '/',
         data:{
-            command: $(this).find("input[type=submit]:focus").val(),
-            value: $(this).attr('value')
-        },
-        success:function()
-        {
-            console.log('data sent');
+            command: command,
+            value: url
         }
     }).done(function(output){
         performAction(output);
-        updateCheckingMessage(url, "found");
+
+        if (command === "Delete"){
+            const index = urls.indexOf(url);
+            urls.splice(index, 1);
+        }else{
+            updateCheckingMessage(url, "found");
+        }    
     })
 });
 
 function updateCheckingMessage(url, state){
-    
     const display = document.getElementsByName(`update${url}`)[0];
     switch(state){
         case "check":
@@ -106,7 +113,8 @@ $(document).on('submit', '#add-url-form', function(e){
 function addUrl(){
     const url = document.getElementById('added-url').value;
 
-    if(url === ""){
+    if(url === "" || urls.includes(url)){
+        setTimeout(resetForm, 50);
         return;
     }
 
@@ -129,9 +137,14 @@ function addUrl(){
     //reset form after data has been sent
     setTimeout(resetForm, 50);
 
+    // add url to list
+    urls.push(url);
+
     //remove 'no current urls' watermark if present 
-    const message = document.getElementById("no-urls");
-    message.style = "display: none";
+    if (urls.length === 1){
+        const message = document.getElementById("no-urls");
+        message.style = "display: none";
+    } 
 }
 
 function resetForm(){

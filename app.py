@@ -28,14 +28,15 @@ def check_site(url: str, timeout:int=5) -> bool:
 def index() -> str:
     if request.method == "POST":
         com: str = request.form.get('command')
-        url: str = request.form.get('value')
+        url: str = request.form.get('value').strip()
 
         print(f"command:\n{com}\n")
         print(f"url:\n{url}\n")
 
         match com:
             case 'Add':
-                urls.append(url)
+                if url not in urls:
+                    urls.append(url)
             case 'Check':
                 online: bool = check_site(url)
                 return f"check::{url}::{online}"
